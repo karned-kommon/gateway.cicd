@@ -1,0 +1,5 @@
+apiVersion: v2
+name: gateway-chart
+description: Chart Helm pour déployer la gateway de Karned
+version: 1.0.0
+appVersion: "1.0"

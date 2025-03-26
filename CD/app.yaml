@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: karned-gateway
+  namespace: argocd
+spec:
+  project: karned
+  source:
+    repoURL: "https://github.com/karned-rekipe/gateway.cicd.git"
+    targetRevision: main
+    path: CD/charts
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: karned
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
