@@ -75,5 +75,29 @@ spec:
                 }
             }
         }
+
+        stage('Send Slack Message') {
+            steps {
+                container('python') {
+                    withCredentials([string(credentialsId: 'SLACK_WEBHOOK_URL', variable: 'SLACK_WEBHOOK_URL')]) {
+                        script {
+                            sh '''
+                            pip install --disable-pip-version-check --no-cache-dir requests
+                            python -c "import os, requests;
+webhook = os.getenv('SLACK_WEBHOOK_URL');
+docker_image = os.getenv('DOCKER_IMAGE');
+docker_tag = os.getenv('DOCKER_TAG');
+message = {
+    'text': f'New version of {docker_image} ({docker_tag}) has been built and pushed to Docker Hub',
+    'username': 'Jenkins Bot',
+    'icon_emoji': ':rocket:'
+};
+requests.post(webhook, json=message)"
+                            '''
+                        }
+                    }
+                }
+            }
+        }
     }
 }
