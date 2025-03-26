@@ -1,6 +1,6 @@
 app:
   name: karned-gateway
-  image: killiankopp/api-gateway:0.1.0
+  image: killiankopp/api-gateway:0.1.1
   replicas: 1
   url: api.karned.bzh
   namespace: karned
