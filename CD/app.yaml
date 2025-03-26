@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: "https://github.com/karned-rekipe/gateway.cicd.git"
     targetRevision: main
-    path: CD/charts
+    path: CD/helm
   destination:
     server: https://kubernetes.default.svc
     namespace: karned
